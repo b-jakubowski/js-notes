@@ -10,6 +10,7 @@ Architecture:
 
 General:
 * [Components life-cycle hooks](#Components-life-cycle-hooks)
+* [One-way and Two-way Data Binding in Angular](#one-way-and-two-way-data-binding-in-angular)
 
 Routes:
 * [Route Guards](#route-guards)
@@ -18,6 +19,9 @@ Routes:
 RxJS:
 * [Reactive programming](#reactive-programming)
 * [Subject vs BehaviorSubject](#subject-vs-behaviorsubject)
+
+NgRx:
+* [What is NgRx](#what-is-ngrxs)
 
 TypeScript: 
 * [TypeScript inference type](#typescript-inference-type)
@@ -78,14 +82,19 @@ Poor user experience, since the user will see nothing more than a blank/loading 
 Server-side rendering solves this issue by pre-rendering the requested page on the server and providing the markup of the rendered page during the initial page load.
 
 ### Components life-cycle hooks
-- ngOnChanges() - Called before ngOnInit() and whenever one or more data-bound input properties change.
-- ngOnInit() - Called once, after the first ngOnChanges().
-- ngDoCheck() - Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
-- ngAfterContentInit() - Called once after the first ngDoCheck().
-- ngAfterContentChecked() - Called after the ngAfterContentInit() and every subsequent ngDoCheck().
-- ngAfterViewInit() - Called once after the first ngAfterContentChecked().
-- ngAfterViewChecked() - Called after the ngAfterViewInit() and every subsequent ngAfterContentChecked().
-- ngOnDestroy() - Called just before Angular destroys the directive/component.
+* ngOnChanges() - Called before ngOnInit() and whenever one or more data-bound input properties change.
+* ngOnInit() - Called once, after the first ngOnChanges().
+* ngDoCheck() - Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
+* ngAfterContentInit() - Called once after the first ngDoCheck().
+* ngAfterContentChecked() - Called after the ngAfterContentInit() and every subsequent ngDoCheck().
+* ngAfterViewInit() - Called once after the first ngAfterContentChecked().
+* ngAfterViewChecked() - Called after the ngAfterViewInit() and every subsequent ngAfterContentChecked().
+* ngOnDestroy() - Called just before Angular destroys the directive/component.
+
+### One-way and Two-way Data Binding in Angular
+* One-way data binding will bind the data from the component to the view (DOM) or from view to the component. One-way data binding is unidirectional.
+* Two-way data binding in Angular will help users to exchange data from the component to view and from view to the component. It will help users to establish communication bi-directionally.
+* Why not 2-way-binding - what you lose in return is the ability to control when state should change and sight of where changes come from. Also when the application grows on size, the performance may decrease because angular will watch of every 2waybinding element.
 
 ## Rxjs
 ### Reactive programming: 
@@ -116,8 +125,17 @@ subject.subscribe(x => console.log(x));
 ```
 Console output: 1
 
+## NgRx
+### What is NgRx?
+
+
 ## Routing
 ### Route Guards
+* **CanActivate**: Controls if a route can be activated.
+* **CanActivateChild**: Controls if children of a route can be activated.
+* **CanLoad**: Controls if a route can even be loaded. This becomes useful for feature modules that are lazy loaded. They won’t even load if the guard returns false.
+* **CanDeactivate**: Controls if the user can leave a route. Note that this guard doesn’t prevent the user from closing the browser tab or navigating to a different address. It only prevents actions from within the application itself.
+
 ### CanDeactivate guard
 
 ### TypeScript inference type
