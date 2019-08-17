@@ -19,6 +19,7 @@ Routes:
 RxJS:
 * [Reactive programming](#reactive-programming)
 * [Subject vs BehaviorSubject](#subject-vs-behaviorsubject)
+* [Why use AsyncPipe](#why-use-asyncpipe)
 
 NgRx:
 * [What is NgRx](#what-is-ngrxs)
@@ -75,11 +76,11 @@ TLDR:
 ### Server-side rendering
 A normal Angular application executes in the browser, rendering pages in the DOM in response to user actions. Angular Universal executes on the server, generating static application pages that later get bootstrapped on the client. 
 Big issue of the traditional SPA is that they cannot be rendered until the entire JavaScript required for their initial rendering is available. This leads to two big problems:
-
-Not all search engines are running the JavaScript associated to the page so they are not able to index the content of dynamic apps properly.
-Poor user experience, since the user will see nothing more than a blank/loading screen until the JavaScript associated with the page is downloaded, parsed and executed.
+* Not all search engines are running the JavaScript associated to the page so they are not able to index the content of dynamic apps properly.
+* Poor user experience, since the user will see nothing more than a blank/loading screen until the JavaScript associated with the page is downloaded, parsed and executed.
 
 Server-side rendering solves this issue by pre-rendering the requested page on the server and providing the markup of the rendered page during the initial page load.
+
 
 ### Components life-cycle hooks
 * ngOnChanges() - Called before ngOnInit() and whenever one or more data-bound input properties change.
@@ -125,9 +126,14 @@ subject.subscribe(x => console.log(x));
 ```
 Console output: 1
 
+### Why use AsyncPipe
+* less code. You dont have to subscribe in ts file to receive data.
+* AsyncPipe autounsubcribes from observable. So there is again less code and performance enhancement(no memory leaks).
+
 ## NgRx
 ### What is NgRx?
-
+* NgRx provides state management, isolation of side effects, entity collection management, router bindings, code generation, and developer tools that enhance developers experience when building many different types of applications.
+* Using NgRx Effects and Store, any interaction with external resources side effects, like network requests, web socket and any business logic can be isolated from the UI. This isolation allows for more pure and simple components, and keep the single responsibility principle.
 
 ## Routing
 ### Route Guards
