@@ -21,12 +21,17 @@ RxJS:
 * [Subject vs BehaviorSubject](#subject-vs-behaviorsubject)
 * [Why use AsyncPipe](#why-use-asyncpipe)
 * [RxJs Error Handling](#rxjs-error-handling)
+* [Flattening operators](#flattening-operators)
 
 NgRx:
 * [What is NgRx](#what-is-ngrxs)
 
 TypeScript: 
 * [TypeScript inference type](#typescript-inference-type)
+
+Testing:
+* [JavaScript & Node.js testing best practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
+
 
 
 ## Architecture:
@@ -167,6 +172,20 @@ http$.pipe(
     )
     .subscribe()
 ```
+
+### Flattening operators
+based on [Demystifying Flattening Operators in RXJS without Code](http://alanpryorjr.com/2019-05-15-rxjs-flattening-operators/)
+* **switchMap** - Drop everything you were already doing and immediately begin the new task. This means only the latest and greatest values are provided.
+Commonly used with HTTP requests where a new source emission means you no longer care about or need the previous inflight request. The current inner observable is canceled and only the new one is active.
+
+* **concatMap** - You add your boss’s request to the end of your to-do list, but you completely finish whatever you were currently working on, and then you begin work on the next task. You eventually finish everything, and you do so in order.
+Use this when the order of operations is important such as if you were calculating updates to a financial transaction where you needed to add money and add an interest payment, in which case the order that the addition and multiplication happen matters and transactions occur in order.
+
+* **mergeMap** - The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
+use this when you don’t care about the order of operations and just want all of the things to happen ASAP, such as an alert system.
+
+* **exhaustMap** - You have tunnel vision and completely ignore new requests from your boss until you are done with what you are working on, and only then do you begin listening for new tasks.
+A common use-case here is login requests; usually there is no reason to send another authentication request until you have received the status of the first, so if the user types in their credentials and spammed the login button you would only send the first login request and not send another until it returns with success or failure.
 
 ## NgRx
 ### What is NgRx?
