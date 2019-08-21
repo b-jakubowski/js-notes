@@ -1,4 +1,4 @@
-# Tech-Interview-Questions
+# Angular-Interview-Questions
 
 ## Table of Contents
 Architecture:
@@ -20,6 +20,7 @@ RxJS:
 * [Reactive programming](#reactive-programming)
 * [Subject vs BehaviorSubject](#subject-vs-behaviorsubject)
 * [Why use AsyncPipe](#why-use-asyncpipe)
+* [RxJs Error Handling](#rxjs-error-handling)
 
 NgRx:
 * [What is NgRx](#what-is-ngrxs)
@@ -31,8 +32,8 @@ TypeScript:
 ## Architecture:
 ### Model-View-Presenter with Angular
 [More details](https://blog.angularindepth.com/model-view-presenter-with-angular-3a4dbffe49bb)
-* Model-View-Presenter (often abbreviated MVP) is an architectural software design pattern for implementing the user interface (UI) of an application.
-* Model-View-Presenter separates presentation from the domain model
+* Model-View-Presenter - architectural software design pattern for implementing the user interface (UI) of an application.
+* Model-View-Presenter separates presentation layer from the domain model
 * The presentation layer reacts to changes in the domain by applying the Observer Pattern
 * The view does not contain any logic or behaviour except in the form of data bindings and widget composition. It delegates control to a presenter when user interactions occur.
 * The presenter batches state changes so that the user filling a form results in one big state change as opposed to many small changes, e.g. update the application state once per form instead of once per field.
@@ -49,16 +50,15 @@ Components in that case can be divided :
 
 ### Dependency injection
 * Dependency injection (DI) lets you keep your component classes lean and efficient. They don't fetch data from the server, validate user input, or log directly to the console; they delegate such tasks to services.
-* Podstawową zasadą działania Dependency Injection jest posiadanie serwisu, który zajmuje się uzupełnianiem potrzebnych zależności.
 
 ### Unidirectional data flow
 change detection cannot cause cycles. It also helps to maintain simpler and more predictable data flows in applications, along with substantial performance improvements.
 ![unidirectional data flow](https://miro.medium.com/max/875/1*kwcTqvUDyhsPJU_Bbl4C6g.png "unidirectional data flow")
 
 ### Centralized state management
-- The application state is a single immutable data structure
-- A state change is triggered by an action, an object describing what happened
-- Pure functions called reducers take the previous state and the next action to compute the new state
+* The application state is a single immutable data structure
+* A state change is triggered by an action, an object describing what happened
+* Pure functions called reducers take the previous state and the next action to compute the new state
 
 ![state](https://miro.medium.com/max/875/1*KGK4Je5Iq7GrUPXz-XePzw.png "state")
 
@@ -67,20 +67,18 @@ change detection cannot cause cycles. It also helps to maintain simpler and more
 ### Angular Performance Checklist
 [Angular Performance Checklist](https://github.com/mgechev/angular-performance-checklist)
 TLDR:
-- OnPush strategy
-- Angular Zone optimization
-- manually set changeDetection
-- @Input as setter instead OnChanges hook
-- lazy loading of views / modules
+* OnPush strategy
+* Angular Zone optimization
+* manually set changeDetection
+* @Input as setter instead OnChanges hook
+* lazy loading of views / modules
 
 ### Server-side rendering
-A normal Angular application executes in the browser, rendering pages in the DOM in response to user actions. Angular Universal executes on the server, generating static application pages that later get bootstrapped on the client. 
-Big issue of the traditional SPA is that they cannot be rendered until the entire JavaScript required for their initial rendering is available. This leads to two big problems:
-* Not all search engines are running the JavaScript associated to the page so they are not able to index the content of dynamic apps properly.
-* Poor user experience, since the user will see nothing more than a blank/loading screen until the JavaScript associated with the page is downloaded, parsed and executed.
-
-Server-side rendering solves this issue by pre-rendering the requested page on the server and providing the markup of the rendered page during the initial page load.
-
+* A normal Angular application executes in the browser, rendering pages in the DOM in response to user actions. 
+* Angular Universal executes on the server, generating static application pages that later get bootstrapped on the client. 
+* SPA cannot be rendered until the entire JavaScript required for their initial rendering is available. This leads to two big problems:
+1. Problems with dynamic content indexing by search-engines
+1. User will see nothing more than a blank/loading screen until the JavaScript associated with the page is downloaded, parsed and executed.
 
 ### Components life-cycle hooks
 * ngOnChanges() - Called before ngOnInit() and whenever one or more data-bound input properties change.
@@ -129,6 +127,46 @@ Console output: 1
 ### Why use AsyncPipe
 * less code. You dont have to subscribe in ts file to receive data.
 * AsyncPipe autounsubcribes from observable. So there is again less code and performance enhancement(no memory leaks).
+
+### RxJs Error Handling
+* RxJs Operator, catchError is simply a function that takes in an input Observable, and outputs an Output Observable. if an error occurs, then the catchError logic is going to kick in
+* It returns an replacement Observable for the stream that just errored out.
+```
+const http$ = this.http.get<Course[]>('/api/courses');
+
+http$
+    .pipe(
+        catchError(err => of([]))
+    )
+    .subscribe(
+        res => console.log('HTTP response', res),
+        err => console.log('HTTP Error', err),
+        () => console.log('HTTP request completed.')
+    );
+```
+* `finalize` operator run code that we always want executed.
+```
+http$
+    .pipe(
+        map(res => res['payload']),
+        catchError(err => throwError(err)),
+        finalize(() => console.log("first finalize() block executed")),
+```
+* instead of rethrowing the error, we can also simply retry to subscribe to the errored out Observable.
+```
+http$.pipe(
+        tap(() => console.log("HTTP request executed")),
+        map(res => Object.values(res["payload"]) ),
+        shareReplay(),
+        retryWhen(errors => {
+            return errors
+                .pipe(
+                    tap(() => console.log('retrying...'))
+                );
+        })
+    )
+    .subscribe()
+```
 
 ## NgRx
 ### What is NgRx?
