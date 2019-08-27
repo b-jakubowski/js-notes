@@ -22,6 +22,7 @@ RxJS:
 * [Why use AsyncPipe](#why-use-asyncpipe)
 * [RxJs Error Handling](#rxjs-error-handling)
 * [Flattening operators](#flattening-operators)
+* [Cache HTTP requests](#cache-http-requests)
 
 NgRx:
 * [What is NgRx](#what-is-ngrxs)
@@ -186,6 +187,9 @@ use this when you don’t care about the order of operations and just want all o
 
 * **exhaustMap** - You have tunnel vision and completely ignore new requests from your boss until you are done with what you are working on, and only then do you begin listening for new tasks.
 A common use-case here is login requests; usually there is no reason to send another authentication request until you have received the status of the first, so if the user types in their credentials and spammed the login button you would only send the first login request and not send another until it returns with success or failure.
+
+### Cache HTTP requests
+First, we just need to execute a regular HTTP query (for ex. get) and pipe the stream through shareReplay operator! This transforms the initial stream to a ReplaySubject! In other words, new subscriptions will NOT execute other HTTP requests but a cached value will be used  
 
 ## NgRx
 ### What is NgRx?
