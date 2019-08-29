@@ -11,6 +11,7 @@ Architecture:
 General:
 * [Components life-cycle hooks](#Components-life-cycle-hooks)
 * [One-way and Two-way Data Binding in Angular](#one-way-and-two-way-data-binding-in-angular)
+* [Performance Optimizations](#performance-optimizations)
 
 Routes:
 * [Route Guards](#route-guards)
@@ -100,6 +101,31 @@ TLDR:
 * One-way data binding will bind the data from the component to the view (DOM) or from view to the component. One-way data binding is unidirectional.
 * Two-way data binding in Angular will help users to exchange data from the component to view and from view to the component. It will help users to establish communication bi-directionally.
 * Why not 2-way-binding - what you lose in return is the ability to control when state should change and sight of where changes come from. Also when the application grows on size, the performance may decrease because angular will watch of every 2waybinding element.
+
+### Performance Optimizations
+[*article*](https://blog.angular.io/angular-tools-for-high-performance-6e10fb9a0f4a)
+
+
+**Component level code-splitting** - load individual components lazily without a route navigation.
+You can use: 
+* [ngx-loadable](https://www.npmjs.com/package/ngx-loadable)
+* [herodevs/hero-loader](https://www.npmjs.com/package/@herodevs/hero-loader)
+
+**Route level code-splitting** - lazy load the individual routes.
+[more about](https://web.dev/route-level-code-splitting-in-angular/)
+* with Angular CLI v. 8.1 You can generate lazy module with `ng g module [module name] --route [route name] --module [parent module]`
+this 
+
+**Preloading Modules** - strategy that preloads all the modules in the application. You can use it by configuring the Angular router
+`RouteModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })`.
+
+For larger apps, that has many modules and requires advanced preloading:
+* Quicklink — preload only modules associated with visible links in the viewport. [ngx-quicklink](https://github.com/mgechev/ngx-quicklink)
+* Predictive prefetching — preload only the modules that are likely to be needed next [guess.js](https://github.com/guess-js/guess), [video guide](https://www.youtube.com/watch?v=5FRxQiGqqmM)
+
+**Performance budget** - You can specify limits on production bundles of an app.
+* If the budget’s `maximumWarning` value is reached, the CLI will show a warning.
+* If the budget's `maximumError` value is reached the build will fail. 
 
 ## Rxjs
 ### Reactive programming: 
