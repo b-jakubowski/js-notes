@@ -7,6 +7,7 @@ Architecture:
 * [Dependency injection](#dependency-injection)
 * [Unidirectional data flow](#dependency-injection)
 * [Centralized state management](#centralized-state-management)
+* [What is bootstrapping](#what-is-bootstrapping)
 
 General:
 * [Components life-cycle hooks](#Components-life-cycle-hooks)
@@ -68,6 +69,14 @@ change detection cannot cause cycles. It also helps to maintain simpler and more
 * Pure functions called reducers take the previous state and the next action to compute the new state
 
 ![state](https://miro.medium.com/max/875/1*KGK4Je5Iq7GrUPXz-XePzw.png "state")
+
+### What is bootstrapping?
+* An NgModule describes how the application parts fit together. Every application has at least one Angular module, the root module that you bootstrap to launch the application. By convention, it is usually called AppModule.
+* bootstrap—the root component that Angular creates and inserts into the index.html host web page.
+*  the bootstrapping process creates the component(s) listed in the bootstrap array and inserts each one into the browser DOM.
+* Inserting a bootstrapped component usually triggers a cascade of component creations that fill out that tree of components.
+* While you can put more than one component tree on a host web page, most applications have only one component tree and bootstrap a single root component.
+
 
 ## General
 
