@@ -9,6 +9,10 @@ Architecture:
 * [Centralized state management](#centralized-state-management)
 * [What is bootstrapping](#what-is-bootstrapping)
 
+OOP:
+* [OOP encapsulation](#OOP-encapsulation)
+* [OOP abstraction](#OOP-abstraction)
+
 General:
 * [Components life-cycle hooks](#Components-life-cycle-hooks)
 * [One-way and Two-way Data Binding in Angular](#one-way-and-two-way-data-binding-in-angular)
@@ -77,6 +81,29 @@ change detection cannot cause cycles. It also helps to maintain simpler and more
 * Inserting a bootstrapped component usually triggers a cascade of component creations that fill out that tree of components.
 * While you can put more than one component tree on a host web page, most applications have only one component tree and bootstrap a single root component.
 
+
+## OOP
+### OOP encapsulation
+* it is the process of ensuring accurate protection over certain data (properties) passed back and forth between your application.
+* **Private**: can only be accessed within the class it was defined in
+* **Protected**: can only be accessed within the class it was defined in as well as inheriting the super class. Outside clients are unauthorized.
+* **Getters**: its purpose is to give indirect read access to client code to a private or protected member that they are otherwise prohibited from. Read-only properties are made possible when used without it’s setter counterpart.
+* **Setters**: its purpose is to give indirect write access to client code to a private or protected member that they are otherwise prohibited from. Write-only properties are made possible when used without it’s getter counterpart.
+
+### OOP abstraction
+* It is the process of hiding the internal complexity of a class while only requiring the absolute necessary data to function correctly.
+* the goal is to make our source code as simple and easy to use as possible for our clients
+
+### OOP inherirance
+* the process of structuring a class hierarchy of similar objects that can extend the general functionality of it’s base while making it’s own implementation more concrete
+* inheritance is the mechanism of basing an object or class upon another object (prototype-based inheritance) or class (class-based inheritance), retaining similar implementation.
+* think in terms of base classes and sub classes when breaking down inheritance. Sub classes being the objects preforming the action of extending while base classes are the objects being extended.
+*  Inheritance is very beneficial in keeping our code DRY compliant and happy side effect of this is that it helps to keep our file sizes small.
+
+### OOP polymorphism
+*  the condition of occurring in several different forms.
+*  it is the ability for specific classes or objects to be referenced in their more general sense, to then preform an action shared amongst multiple sub types.
+*  The big stipulation that comes with polymorphism, is that you cannot call any method specific to the sub class even if the variable that you’re dealing with is an instance of that sub class
 
 ## General
 
