@@ -1,6 +1,9 @@
-# Angular-Interview-Questions
+# Tech-Interview-Questions
 
 ## Table of Contents
+Basics:
+* [Http](#http)
+
 Architecture:
 * [Model-View-Presenter with Angular](#model-view-presenter-with-angular)
 * [Component based architecture](#component-based-architecture)
@@ -14,12 +17,17 @@ OOP:
 * [OOP abstraction](#OOP-abstraction)
 * [OOP inheritance](#OOP-inheritance)
 * [OOP polymorphism](#OOP-polymorphism)
+* [SOLID](#solid)
+* [CLASS](#class)
 
 General:
 * [Components life-cycle hooks](#Components-life-cycle-hooks)
 * [One-way and Two-way Data Binding in Angular](#one-way-and-two-way-data-binding-in-angular)
 * [Performance Optimizations](#performance-optimizations)
 * [Directives](#directives)
+* [Http interceptors](#http-interceptors)
+* [Services](#services)
+* [Resolvers](#resolvers)
 
 Routes:
 * [Route Guards](#route-guards)
@@ -32,6 +40,7 @@ RxJS:
 * [RxJs Error Handling](#rxjs-error-handling)
 * [Flattening operators](#flattening-operators)
 * [Cache HTTP requests](#cache-http-requests)
+* [When to unsubscribe](#when-to-unsubscribe)
 
 NgRx:
 * [What is NgRx](#what-is-ngrxs)
@@ -42,6 +51,12 @@ TypeScript:
 Testing:
 * [JavaScript & Node.js testing best practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
 
+
+## Basics
+### Http
+* Communication between client computers and web servers is done by sending HTTP Requests and receiving HTTP Responses
+* it is a client-server protocol, which means requests are initiated by the recipient, usually the Web browser. 
+* client sends an HTTP request to the web -> web server receives the request -> The server runs an application to process the request -> The server returns an HTTP response (output) to the browser -> The client (the browser) receives the response
 
 
 ## Architecture:
@@ -84,7 +99,6 @@ change detection cannot cause cycles. It also helps to maintain simpler and more
 * Inserting a bootstrapped component usually triggers a cascade of component creations that fill out that tree of components.
 * While you can put more than one component tree on a host web page, most applications have only one component tree and bootstrap a single root component.
 
-
 ## OOP
 ### OOP encapsulation
 * it is the process of ensuring accurate protection over certain data (properties) passed back and forth between your application.
@@ -107,6 +121,24 @@ change detection cannot cause cycles. It also helps to maintain simpler and more
 *  the condition of occurring in several different forms.
 *  it is the ability for specific classes or objects to be referenced in their more general sense, to then preform an action shared amongst multiple sub types.
 *  The big stipulation that comes with polymorphism, is that you cannot call any method specific to the sub class even if the variable that you’re dealing with is an instance of that sub class
+
+### SOLID
+[solid with typescript](https://medium.com/@ashu.singh212/s-o-l-i-d-in-typescript-c0e4fe6c345a)
+* **Single responsibility principle**: a class should have one, and only one, reason to change;
+You can apply the principle to methods or modules, ensuring that they do just one thing and therefore have just one reason to change.
+* **Open-closed principle**: it should be possible to extend the behavoir of a class without  modifying it;
+In short, inheritance fulfils the second principle.
+* **Liskov Substitution principle**: Each derived class must replace its parent without affecting parent’s behaviour.
+a subclass should override the parent class methods in a way that does not break functionality from a client’s point of view.
+* **Interface segregation principle**: many small, client-specific interfaces are better than one general purpose interface;
+In short, clients shouldn’t be forced to depend on methods they do not use.
+* **Dependency inversion principle**: depends on abstractions not concretions;
+
+### Class 
+class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).
+
+### Object Oriented Programming
+* OOP is usually defined by its two core concepts: Polymorphism and Inheritance.
 
 ## General
 
@@ -173,6 +205,45 @@ For larger apps, that has many modules and requires advanced preloading:
 * **Structural directives** to create and destroy DOM elements. easy to recognize. An asterisk (*) precedes the directive attribute. `*ngIf`, `ngFor`
 * Existing diractives examples `[ngClass]`
 
+### Http interceptors
+*  It provides a way to intercept HTTP requests and responses to transform or handle them before passing them along.
+* Angular applies interceptors in the order that you provide them. If you provide interceptors A, then B, then C, requests will flow in A->B->C and responses will flow out C->B->A. You cannot change the order or remove interceptors later. 
+USES:
+* **Convert** - When the API returns a format we do not agree with, we can use an interceptor to format it the way we like it.
+* **Manipulate URL** - We could, for example, want to change HTTP to HTTPS.
+* **Global loader** 
+* **Headers** - authentication, caching, 
+
+### Services
+* Components shouldn't fetch or save data directly and they certainly shouldn't knowingly present fake data. They should focus on presenting data and delegate data access to a service.
+* @Injectable() decorator marks the class as one that participates in the dependency injection system.
+* A component can delegate certain tasks to services, such as fetching data from the server, validating user input, or logging directly to the console. 
+* **Singleton service** is a service for which only one instance exists in an app. You can creating by:
+-> Declare root for the value of the @Injectable() providedIn property
+-> Include the service in the AppModule or in a module that is only imported by the AppModule
+
+### Resolvers
+* Resolver is a service which has to be [provided] in root module
+* resolver is that intermediate code, which can be executed when a link has been clicked and before a component is loaded.
+* General routing flow
+-> User clicks the link.
+-> Angular loads the respective component.
+* Routing Flow with Resolver
+-> User clicks the link.
+-> Angular executes certain code and returns a value or observable.
+-> u can collect the returned value or observable in constructor or in ngOnInit, in class of your component which is about to load.
+-> Use the collected the data for your purpose.
+-> Now you can load your component.
+```
+	@Injectable()
+	export class UserResolve implements Resolve<User> {
+		constructor(private usersService: UsersService) {}
+
+		resolve(route: ActivatedRouteSnapshot) {
+			return this.usersService.getUser(route.params['id']);
+		}
+	}
+```
 
 ## Rxjs
 ### Reactive programming: 
@@ -263,6 +334,26 @@ A common use-case here is login requests; usually there is no reason to send ano
 
 ### Cache HTTP requests
 First, we just need to execute a regular HTTP query (for ex. get) and pipe the stream through shareReplay operator! This transforms the initial stream to a ReplaySubject! In other words, new subscriptions will NOT execute other HTTP requests but a cached value will be used  
+
+### When to unsubscribe?
+* inifinite observables (ex. with using interval())
+* when using redux Store
+* dont unsubscribe - async pipe
+* dont unsubscribe - @HostListener
+* dont unsubscribe - Usually when using http service 
+be more declarative about unsubscribing
+```
+ ngOnInit() {
+     this.todos = this.store.select('todos').takeUntil(this.componetDestroyed).subscribe(console.log); 
+
+     this.posts = this.store.select('posts').takeUntil(this.componetDestroyed).subscribe(console.log); 
+  }
+
+  ngOnDestroy() {
+    this.componetDestroyed.next();
+    this.componetDestroyed.unsubscribe();
+  }
+```
 
 ## NgRx
 ### What is NgRx?
