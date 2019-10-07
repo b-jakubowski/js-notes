@@ -12,11 +12,14 @@ Architecture:
 OOP:
 * [OOP encapsulation](#OOP-encapsulation)
 * [OOP abstraction](#OOP-abstraction)
+* [OOP inheritance](#OOP-inheritance)
+* [OOP polymorphism](#OOP-polymorphism)
 
 General:
 * [Components life-cycle hooks](#Components-life-cycle-hooks)
 * [One-way and Two-way Data Binding in Angular](#one-way-and-two-way-data-binding-in-angular)
 * [Performance Optimizations](#performance-optimizations)
+* [Directives](#directives)
 
 Routes:
 * [Route Guards](#route-guards)
@@ -162,6 +165,14 @@ For larger apps, that has many modules and requires advanced preloading:
 **Performance budget** - You can specify limits on production bundles of an app.
 * If the budget’s `maximumWarning` value is reached, the CLI will show a warning.
 * If the budget's `maximumError` value is reached the build will fail. 
+
+### Directives
+* is a function that executes whenever the Angular compiler finds it in the DOM.
+* **Components** are just directives with templates. Under the hood, they use the directive API and give us a cleaner way to define them.
+* **Attribute directives** manipulate the DOM by changing its behavior and appearance. use attribute directives to apply conditional style to elements. You can create custom ones like 'highlight'.
+* **Structural directives** to create and destroy DOM elements. easy to recognize. An asterisk (*) precedes the directive attribute. `*ngIf`, `ngFor`
+* Existing diractives examples `[ngClass]`
+
 
 ## Rxjs
 ### Reactive programming: 
