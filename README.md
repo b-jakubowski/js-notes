@@ -3,6 +3,7 @@
 ## Table of Contents
 Basics:
 * [Http](#http)
+* [Graphql](#graphql)
 
 Architecture:
 * [Model-View-Presenter with Angular](#model-view-presenter-with-angular)
@@ -58,6 +59,16 @@ Testing:
 * Communication between client computers and web servers is done by sending HTTP Requests and receiving HTTP Responses
 * it is a client-server protocol, which means requests are initiated by the recipient, usually the Web browser. 
 * client sends an HTTP request to the web -> web server receives the request -> The server runs an application to process the request -> The server returns an HTTP response (output) to the browser -> The client (the browser) receives the response
+
+### Graphql
+* GraphQL is a syntax that describes how to ask for data, and is generally used to load data from a server to a client
+* only one endpoint for data exchanging.
+* It lets the client specify exactly what data it needs.
+* It makes it easier to aggregate data from multiple sources.
+* It uses a type system to describe data.
+* Resolvers specify where to take data from.
+* Schema defines data types and structure.
+* With GraphQL, the user is able to make a single call to fetch the required information rather than to construct several REST requests to fetch the same.
 
 
 ## Architecture:
@@ -226,6 +237,7 @@ USES:
 ### Resolvers
 * Resolver is a service which has to be [provided] in root module
 * resolver is that intermediate code, which can be executed when a link has been clicked and before a component is loaded.
+* Route resolvers służy dostarczeniu danych do Routa, przed aktywacją Routa, a jeszcze prościej mówiąc, zmuszamy naszą aplikację, aby pokazał widok dopiero jak dane zostaną dostarczone.
 * General routing flow
 -> User clicks the link.
 -> Angular loads the respective component.
