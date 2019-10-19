@@ -32,6 +32,7 @@ General:
 Routes:
 * [Route Guards](#route-guards)
 * [CanDeactivate guard](#candeactivate-guard)
+* [forRoot vs forChild](#forroot-vs-forchild)
 
 RxJS:
 * [Reactive programming](#reactive-programming)
@@ -368,6 +369,13 @@ be more declarative about unsubscribing
 * **CanDeactivate**: Controls if the user can leave a route. Note that this guard doesn’t prevent the user from closing the browser tab or navigating to a different address. It only prevents actions from within the application itself.
 
 ### CanDeactivate guard
+
+### forRoot vs forChild
+* **ForRoot** is used when a module is "eager," that is, it is not lazy-loaded (loads when the application starts),  it uses the same factory as our main module.
+* **ForChild** This way, Angular knows that the route list is only responsible for providing additional routes and is intended for feature modules, has no injector configuration.
+* metoda forRoot umożliwia oddzielenie ładowania serwisów danego modułu od ładowania jego komponentów i dyrektyw
+* Since non-lazy loaded modules are merged, the providers you specify in the forRoot will be available for the entire applications. But as lazy-loaded modules have their own injectors, the providers you specify in the forChild will only be available for injection inside this lazy-loaded module.
+
 
 ### TypeScript inference type
 If you add value to initialized variable, there is no need to provide type to it
