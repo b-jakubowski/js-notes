@@ -4,14 +4,54 @@
 Basics:
 * [Http](#http)
 * [Graphql](#graphql)
+* Czym sa localStorage, sessionStorage oraz cookies i czym się różnią?
 
-Architecture:
-* [Model-View-Presenter with Angular](#model-view-presenter-with-angular)
-* [Component based architecture](#component-based-architecture)
-* [Dependency injection](#dependency-injection)
-* [Unidirectional data flow](#dependency-injection)
-* [Centralized state management](#centralized-state-management)
-* [What is bootstrapping](#what-is-bootstrapping)
+JS theory:
+* W jaki sposób realizowane jest dziedziczenie w JavaScript?
+* Dlaczego warto odchodzić od "document.getElementById" na rzecz "document.querySelector"?
+* W jaki sposób obsługiwany jest setInterval i setTimeout? Kiedy zostaną obsłużone jeśli mamy nieskończenie wiele console.log'ów? (pytanie o Event Loop)
+* Czym są promises?
+* czym jest async await?
+* Wyjaśnij do czego służą funkcje call, bind i apply oraz wskaż różnice pomiędzy nimi.
+* Czym jest prototype?
+* Na co wskazuje this w JavaScript? Podaj przykłady.
+* Jaka jest różnica pomiędzy function expression a function declaration?
+* Wytłumacz na czym polega hoisting.
+
+JS example questions:
+* Jaka jest różnica między zadeklarowaniem zmiennej z użyciem słowa var a z pominięciem?
+  ```
+      var x = 1; 
+      // vs
+      y = 1;
+  ```
+* Jaki będzie wynik sprawdzenia tego warunku?
+  `console.log(3 > 2 > 1);`
+  Dlaczego tak się dzieje?
+* Jak można odczytać cookie w JS?
+* Jaki będzie wynik wywołania setTimeout z wartością czasu 0?
+* Jak zaimplementować stos (Stack) w JS ?
+
+JS exercises:
+* Na czym polega memoizacja?
+* Jaka jest różnica między Spread Operator a Rest Parameters?
+* Czym się różni node od element?
+* Kiedy i dlaczego używa się funkcji throttle i debounce ?
+* Napisz funkcję usuwającą duplikaty z tablicy.
+* Napisz algorytm, który sprwadzi czy nawiasy w ciągu znaków są domknięte i pasujące. Na przykład, "{ac[bb]}", "{dklf(df(kl))d]{}" i "{[[[]]]}" są poprawne. Ale "{3234[fd" i "{df][d}" już nie.
+* Czym sa funkcje wyższego rzędu (higher order functions)?
+
+TypeScript: 
+* [TypeScript inference type](#typescript-inference-type)
+* TypeScript: jaka jest różnica między typowaniem stringów wielką, a małą literą?
+* Jaki subtyping system mamy w TypeScript? Jakie są tego konsekwencje?
+* Czym są union types i intersection types w TypeScript
+
+React: 
+* Reducer (redux)
+* State (redux)
+* action (redux)
+* Redux side effects middleware
 
 OOP:
 * [OOP encapsulation](#OOP-encapsulation)
@@ -20,6 +60,15 @@ OOP:
 * [OOP polymorphism](#OOP-polymorphism)
 * [SOLID](#solid)
 * [CLASS](#class)
+* klasa a obiekt
+
+Architecture:
+* [Model-View-Presenter with Angular](#model-view-presenter-with-angular)
+* [Component based architecture](#component-based-architecture)
+* [Dependency injection](#dependency-injection)
+* [Unidirectional data flow](#dependency-injection)
+* [Centralized state management](#centralized-state-management)
+* [What is bootstrapping](#what-is-bootstrapping)
 
 General:
 * [Components life-cycle hooks](#Components-life-cycle-hooks)
@@ -47,9 +96,6 @@ RxJS:
 NgRx:
 * [What is NgRx](#what-is-ngrxs)
 
-TypeScript: 
-* [TypeScript inference type](#typescript-inference-type)
-
 Testing:
 * [JavaScript & Node.js testing best practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
 
@@ -71,45 +117,18 @@ Testing:
 * With GraphQL, the user is able to make a single call to fetch the required information rather than to construct several REST requests to fetch the same.
 
 
-## Architecture:
-### Model-View-Presenter with Angular
-[More details](https://blog.angularindepth.com/model-view-presenter-with-angular-3a4dbffe49bb)
-* Model-View-Presenter - architectural software design pattern for implementing the user interface (UI) of an application.
-* Model-View-Presenter separates presentation layer from the domain model
-* The presentation layer reacts to changes in the domain by applying the Observer Pattern
-* The view does not contain any logic or behaviour except in the form of data bindings and widget composition. It delegates control to a presenter when user interactions occur.
-* The presenter batches state changes so that the user filling a form results in one big state change as opposed to many small changes, e.g. update the application state once per form instead of once per field.
+## JavaScript Theory
 
-Components in that case can be divided :
-- Presentational components - purely presentational and interactive views. They present a piece of the application state to the user and enable them to affect its state. keep the complexity of presentational components to an absolute minimum
-- Container components - expose pieces of application state to presentational components. They integrate the presentational layer with the rest of our application by translating component-specific events to commands and queries for non-presentational layers.
-- Mixed components -  they contain logic that belongs in multiple horizontal layers. complicated to reuse and tightly coupled.
-![M-V-P](https://miro.medium.com/max/875/1*ZbBBKiBXGqVBYWwzbmZzNw.png "mvp")
+## JavaScript example questions
 
-### Component based architecture:
-* Container components supply a data flow for presentation.
-* Container components translate component-specific events to application state commands or actions to put it in Redux/NgRx Store terms.
+## JavaScript exercises
 
-### Dependency injection
-* Dependency injection (DI) lets you keep your component classes lean and efficient. They don't fetch data from the server, validate user input, or log directly to the console; they delegate such tasks to services.
-
-### Unidirectional data flow
-change detection cannot cause cycles. It also helps to maintain simpler and more predictable data flows in applications, along with substantial performance improvements.
-![unidirectional data flow](https://miro.medium.com/max/875/1*kwcTqvUDyhsPJU_Bbl4C6g.png "unidirectional data flow")
-
-### Centralized state management
-* The application state is a single immutable data structure
-* A state change is triggered by an action, an object describing what happened
-* Pure functions called reducers take the previous state and the next action to compute the new state
-
-![state](https://miro.medium.com/max/875/1*KGK4Je5Iq7GrUPXz-XePzw.png "state")
-
-### What is bootstrapping?
-* An NgModule describes how the application parts fit together. Every application has at least one Angular module, the root module that you bootstrap to launch the application. By convention, it is usually called AppModule.
-* bootstrap—the root component that Angular creates and inserts into the index.html host web page.
-*  the bootstrapping process creates the component(s) listed in the bootstrap array and inserts each one into the browser DOM.
-* Inserting a bootstrapped component usually triggers a cascade of component creations that fill out that tree of components.
-* While you can put more than one component tree on a host web page, most applications have only one component tree and bootstrap a single root component.
+## TypeScript inference type
+If you add value to initialized variable, there is no need to provide type to it
+```
+const x = 1;
+```
+there is no need to add `number` type to this case.
 
 ## OOP
 ### OOP encapsulation
@@ -151,6 +170,47 @@ class is a blueprint for creating objects (a particular data structure), providi
 
 ### Object Oriented Programming
 * OOP is usually defined by its two core concepts: Polymorphism and Inheritance.
+
+
+## Architecture:
+### Model-View-Presenter with Angular
+[More details](https://blog.angularindepth.com/model-view-presenter-with-angular-3a4dbffe49bb)
+* Model-View-Presenter - architectural software design pattern for implementing the user interface (UI) of an application.
+* Model-View-Presenter separates presentation layer from the domain model
+* The presentation layer reacts to changes in the domain by applying the Observer Pattern
+* The view does not contain any logic or behaviour except in the form of data bindings and widget composition. It delegates control to a presenter when user interactions occur.
+* The presenter batches state changes so that the user filling a form results in one big state change as opposed to many small changes, e.g. update the application state once per form instead of once per field.
+
+Components in that case can be divided :
+- Presentational components - purely presentational and interactive views. They present a piece of the application state to the user and enable them to affect its state. keep the complexity of presentational components to an absolute minimum
+- Container components - expose pieces of application state to presentational components. They integrate the presentational layer with the rest of our application by translating component-specific events to commands and queries for non-presentational layers.
+- Mixed components -  they contain logic that belongs in multiple horizontal layers. complicated to reuse and tightly coupled.
+![M-V-P](https://miro.medium.com/max/875/1*ZbBBKiBXGqVBYWwzbmZzNw.png "mvp")
+
+### Component based architecture:
+* Container components supply a data flow for presentation.
+* Container components translate component-specific events to application state commands or actions to put it in Redux/NgRx Store terms.
+
+### Dependency injection
+* Dependency injection (DI) lets you keep your component classes lean and efficient. They don't fetch data from the server, validate user input, or log directly to the console; they delegate such tasks to services.
+
+### Unidirectional data flow
+change detection cannot cause cycles. It also helps to maintain simpler and more predictable data flows in applications, along with substantial performance improvements.
+![unidirectional data flow](https://miro.medium.com/max/875/1*kwcTqvUDyhsPJU_Bbl4C6g.png "unidirectional data flow")
+
+### Centralized state management
+* The application state is a single immutable data structure
+* A state change is triggered by an action, an object describing what happened
+* Pure functions called reducers take the previous state and the next action to compute the new state
+
+![state](https://miro.medium.com/max/875/1*KGK4Je5Iq7GrUPXz-XePzw.png "state")
+
+### What is bootstrapping?
+* An NgModule describes how the application parts fit together. Every application has at least one Angular module, the root module that you bootstrap to launch the application. By convention, it is usually called AppModule.
+* bootstrap—the root component that Angular creates and inserts into the index.html host web page.
+*  the bootstrapping process creates the component(s) listed in the bootstrap array and inserts each one into the browser DOM.
+* Inserting a bootstrapped component usually triggers a cascade of component creations that fill out that tree of components.
+* While you can put more than one component tree on a host web page, most applications have only one component tree and bootstrap a single root component.
 
 ## General
 
@@ -388,10 +448,3 @@ be more declarative about unsubscribing
 * metoda forRoot umożliwia oddzielenie ładowania serwisów danego modułu od ładowania jego komponentów i dyrektyw
 * Since non-lazy loaded modules are merged, the providers you specify in the forRoot will be available for the entire applications. But as lazy-loaded modules have their own injectors, the providers you specify in the forChild will only be available for injection inside this lazy-loaded module.
 
-
-### TypeScript inference type
-If you add value to initialized variable, there is no need to provide type to it
-```
-const x = 1;
-```
-there is no need to add `number` type to this case.
