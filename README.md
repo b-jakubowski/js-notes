@@ -4,19 +4,9 @@
 Basics:
 * [Http](#http)
 * [Graphql](#graphql)
-* Czym sa localStorage, sessionStorage oraz cookies i czym się różnią?
 
-JS theory:
-* W jaki sposób realizowane jest dziedziczenie w JavaScript?
-* Dlaczego warto odchodzić od "document.getElementById" na rzecz "document.querySelector"?
-* W jaki sposób obsługiwany jest setInterval i setTimeout? Kiedy zostaną obsłużone jeśli mamy nieskończenie wiele console.log'ów? (pytanie o Event Loop)
-* Czym są promises?
-* czym jest async await?
-* Wyjaśnij do czego służą funkcje call, bind i apply oraz wskaż różnice pomiędzy nimi.
-* Czym jest prototype?
-* Na co wskazuje this w JavaScript? Podaj przykłady.
-* Jaka jest różnica pomiędzy function expression a function declaration?
-* Wytłumacz na czym polega hoisting.
+[JavaScript Theory](#JavaScript-theory) :
+
 
 JS example questions:
 * Jaka jest różnica między zadeklarowaniem zmiennej z użyciem słowa var a z pominięciem?
@@ -118,8 +108,84 @@ Testing:
 
 
 ## JavaScript Theory
+### localStorage-sessionStorage-cookies
+localStorage
+- Stores data with no expiration date, and gets cleared only through JavaScript, or clearing the Browser cache / Locally Stored Data
+- Storage limit is the maximum amongst the three
+
+sessionStorage
+- The sessionStorage object stores data only for a session, meaning that the data is stored until the browser (or tab) is closed.
+- Data is never transferred to the server.
+- Storage limit is larger than a cookie (at least 5MB).
+
+Cookie
+- Stores data that has to be sent back to the server with subsequent requests. Its expiration varies based on the type and the expiration duration can be set from either server-side or client-side (normally from server-side).
+- Cookies are primarily for server-side reading (can also be read on client-side), localStorage and sessionStorage can only be read on client-side.
+- Size must be less than 4KB.
+- Cookies can be made secure by setting the httpOnly flag as true for that cookie. This prevents client-side access to that cookie
+
+### Czym jest IIFE i do czego się je wykorzystuje?
+- Immediately Invoked Function Expression – mozna wywolac funckje bez wczesniejszego definiowania jej. Jest ona od razu wywolywana.
+- Powszechny javascryptowy pattern uzywany najczesciej przez bliblioteki Jquery, Backbone.js, Modernizr itp.
+Aby umiejscowic caly kod bliblioteki w lokalnym scopie. IIFE chroni scope modulu od srodowiska w którym jest umiejscowiony.
+```
+(function() {
+  const answer = 30 + 20;
+  console.log(answer);
+  })();
+```
+
+### Czym jest garbage collector?
+- Jest to javascryptowy mechanizm do czyszczenia pamieci z nieuzywanych zmiennych. Dzieje się to automatycznie nie musimy niczego implementowac. Dziala to na zasadzie dostepnosci. 
+- Jeżeli zmienna user ma przypisany do siebie obiekt user to pomiedzy nimi jest połączenie.
+Obiekt user jest przetrzymywany w pamięci. Jeżeli zmienną user ustawimy na null to połączenie znika. Żadna zmienna nie ma referencji do obiektu user więc Obiekt jest usowany z pamięci.
+
+### Wytłumacz na czym polega hoisting.
+- Zadeklarowana zmienna w skrypcie zostanie przeniesiona na samą górę kodu, ale bez przypisanej wartości. Dzięki temu możemy użyć zmiennej przed jej zadeklarowaniem.
+- Let i const nie sa hoistowane.
+- "use strict" blokuje hoisting.
+
+### Var, let, const
+- `var` jest hoistowany jeżeli jest deklarowany poza funkcja to jest dostepny globalnie, jeżeli jest deklarowany w funkcji to nie wychodzi poza nia. Do `var` i `let` można nadpisywać. `var` może być ponownie deklarowany. Nie preferowany w uzyciu.
+- `let` - tak zwana block scoped, dziala w zakresie scopu {}. Wartosc let może być nadpisywana ale nie ponownie deklarowana.
+- `const` - tez jest block scoped, wartosc nie może zostac nadpisana ani ponownie deklarowana
+
+### Czym są promises?
+### czym jest async await?
+### Wyjaśnij do czego służą funkcje call, bind i apply oraz wskaż różnice pomiędzy nimi.
+### Na co wskazuje this w JavaScript? Podaj przykłady.
+- Metoda - funkcja w klasie
+- Funkcja – po prostu funkcja
+- `this` w JS wskazuje na obiekt do którego należy. Globalny obiekt przegladarce to Window.
+- W metodzie this wskazuje na obiekt do którego należy.
+- W funkcji this wskazuje na obiekt globalny.
+- W funkcji w strict mode this to undefined
+- W evencie this wskazuje na obiekt który otrzymal event
+
+
+### Jaka jest różnica pomiędzy function expression a function declaration?
+### W jaki sposób obsługiwany jest setInterval i setTimeout? Kiedy zostaną obsłużone jeśli mamy nieskończenie wiele console.log'ów? (pytanie o Event Loop)
+- `setTimeout` wywoluje funkcje po uplywie okreslonego czasu w milisekundach.
+- `setInterval` wywoluje funkcje cyklicznie. Cykl definiujemy w milisekundach.
+- Aby anulowac te funkcje musimy przypisac do zmiennej setTimeout/setInterval, a nastepnie wywolac na zmiennej `.clearTimeout()`/`.clearInterval()`.
+
+### W jaki sposób realizowane jest dziedziczenie w JavaScript?
+### Czym jest prototype?
 
 ## JavaScript example questions
+### Destrukturyzacja
+```
+const obiekt = {
+  name: 'name',
+  value: 'value'
+}
+const tablica = [1, 2, 3, 4, 5];
+
+const {name, value} = obiekt;
+const [element1, element2, ...reszta] = tablica;
+
+console.log(element1, element2, reszta) // 1, 2, [3,4,5]
+```
 
 ## JavaScript exercises
 
