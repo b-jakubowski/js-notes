@@ -15,6 +15,7 @@ JS example questions:
       // vs
       y = 1;
   ```
+  
 * Jaki będzie wynik sprawdzenia tego warunku?
   `console.log(3 > 2 > 1);`
   Dlaczego tak się dzieje?
@@ -135,12 +136,12 @@ Aby umiejscowic caly kod bliblioteki w lokalnym scopie. IIFE chroni scope modulu
   })();
 ```
 
-### Czym jest garbage collector?
+### What is a garbage collector?
 - Jest to javascryptowy mechanizm do czyszczenia pamieci z nieuzywanych zmiennych. Dzieje się to automatycznie nie musimy niczego implementowac. Dziala to na zasadzie dostepnosci. 
 - Jeżeli zmienna user ma przypisany do siebie obiekt user to pomiedzy nimi jest połączenie.
 Obiekt user jest przetrzymywany w pamięci. Jeżeli zmienną user ustawimy na null to połączenie znika. Żadna zmienna nie ma referencji do obiektu user więc Obiekt jest usowany z pamięci.
 
-### Wytłumacz na czym polega hoisting.
+### Explain hoisting hoisting.
 - Zadeklarowana zmienna w skrypcie zostanie przeniesiona na samą górę kodu, ale bez przypisanej wartości. Dzięki temu możemy użyć zmiennej przed jej zadeklarowaniem.
 - Let i const nie sa hoistowane.
 - "use strict" blokuje hoisting.
@@ -150,9 +151,93 @@ Obiekt user jest przetrzymywany w pamięci. Jeżeli zmienną user ustawimy na nu
 - `let` - tak zwana block scoped, dziala w zakresie scopu {}. Wartosc let może być nadpisywana ale nie ponownie deklarowana.
 - `const` - tez jest block scoped, wartosc nie może zostac nadpisana ani ponownie deklarowana
 
-### Czym są promises?
-### czym jest async await?
-### Wyjaśnij do czego służą funkcje call, bind i apply oraz wskaż różnice pomiędzy nimi.
+### What is Promise?
+- The Promise object is used for asynchronous computations. A Promise represents a value which may be available now, or in the future, or never.
+- `callback`- function that is to be executed after another function (normally asynchronous) has finished executing. To avoid infinite callbacks, we use `Promise`.
+```
+const promisedPresent = getPresent();
+  promisedPresent
+    .then(present => console.log('Super prezent!', present))
+    .catch(error => console.log('Nie ma prezentu :(', error));
+```
+- `then` will be executed when the promise is fullfilled, `catch` if not.
+
+A Promise is in one of these states:
+- `pending`: initial state, neither fulfilled nor rejected.
+- `fulfilled`: meaning that the operation completed successfully.
+- `rejected`: meaning that the operation failed.
+
+### What is async await?
+- ES7 introduce async and await syntax. It makes the asynchronous syntax look prettier and easier to understand, without the .then and .catch.
+- async / await solves the problem of threads being blocked (waiting idly) while waiting for its task to complete.
+- Specify the word `async` before a functions makes this function return a Promise.
+- `await` works only inside an Async function and it returns the Promise's result after it is solved. 
+```
+async function doSomething() {
+  try {
+    const data = await asyncAction();
+    console.log(`message = ${data}`);
+  } catch(error) {
+    console.log(`message = ${error}`);
+  }
+}
+```
+
+### call()
+- The first parameter in `call()` method sets the "this" value, which is the object, on which the function is invoked upon. In this case, it's the "obj" object above.
+- The rest of the parameters are the arguments to the actual function.
+```javascript
+    const obj = {name:"Niladri"};
+    
+    const greeting = function(a,b,c){
+        return "welcome "+this.name+" to "+a+" "+b+" in "+c;
+    };
+    
+    console.log(greeting.call(obj,"Newtown","KOLKATA","WB"));
+```
+
+### apply()
+- Similarly to `call()` method the first parameter in `apply()` method sets the "this" value which is the object upon which the function is invoked. In this case it's the "obj" object above.
+- The only difference of `apply()` with the `call()` method is that the second parameter of the `apply()` method accepts the arguments to the actual function as an array.
+- Use `.call()` or `.apply()` when you want to invoke the function immediately, and modify the context.
+```javascript
+    const obj = {name:"Niladri"};
+    
+    const greeting = function(a,b,c){
+        return "welcome "+this.name+" to "+a+" "+b+" in "+c;
+    };
+    
+    // array of arguments to the actual function
+    const args = ["Newtown","KOLKATA","WB"];  
+    console.log("Output using .apply() below ")
+    console.log(greeting.apply(obj,args));
+```
+
+### bind()
+- The first parameter to the `bind()` method sets the value of "this" in the target function when the bound function is called. 
+- It works by returning a copy of the function. 
+- Use `.bind()` when you want that function to later be called with a certain context, useful in events.
+- `call()`/`apply()` call the function immediately, whereas `bind()` returns a function that, when later executed, will have the correct context set for calling the original function.
+
+```javascript
+    const obj = {name:"Niladri"};
+    
+    const greeting = function(a,b,c){
+        return "welcome "+this.name+" to "+a+" "+b+" in "+c;
+    };
+    
+    //creates a bound function that has same body and parameters 
+    const bound = greeting.bind(obj); 
+    
+    console.log("Output using .bind() below ");
+    console.log(bound("Newtown","KOLKATA","WB")); //call the bound function
+```
+
+### What is the difference between call, bind and apply?
+- `call`, `bind` and `apply` are used in calling a function, with some Object.
+- You can use `call()`/`apply()` to invoke the function immediately.
+- `bind()` returns a bound function that, when executed later, will have the correct context ("this") for calling the original function.
+
 ### Na co wskazuje this w JavaScript? Podaj przykłady.
 - Metoda - funkcja w klasie
 - Funkcja – po prostu funkcja
