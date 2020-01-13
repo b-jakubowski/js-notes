@@ -11,9 +11,9 @@ Basics:
 JS example questions:
 * Jaka jest różnica między zadeklarowaniem zmiennej z użyciem słowa var a z pominięciem?
   ```
-      var x = 1; 
-      // vs
-      y = 1;
+	  var x = 1; 
+	  // vs
+	  y = 1;
   ```
   
 * Jaki będzie wynik sprawdzenia tego warunku?
@@ -125,10 +125,9 @@ Cookie
 - Size must be less than 4KB.
 - Cookies can be made secure by setting the httpOnly flag as true for that cookie. This prevents client-side access to that cookie
 
-### Czym jest IIFE i do czego się je wykorzystuje?
-- Immediately Invoked Function Expression – mozna wywolac funckje bez wczesniejszego definiowania jej. Jest ona od razu wywolywana.
-- Powszechny javascryptowy pattern uzywany najczesciej przez bliblioteki Jquery, Backbone.js, Modernizr itp.
-Aby umiejscowic caly kod bliblioteki w lokalnym scopie. IIFE chroni scope modulu od srodowiska w którym jest umiejscowiony.
+### What is `IIFE` and what do you use it for ?
+- the key to `IIFE` pattern is taking a function and turning it into an expression and executing it immediately.
+- is a good way at protecting the scope of your function and the variables within it. Any variables declared inside the `IIFE` are not visible to the outside world.
 ```
 (function() {
   const answer = 30 + 20;
@@ -142,9 +141,11 @@ Aby umiejscowic caly kod bliblioteki w lokalnym scopie. IIFE chroni scope modulu
 Obiekt user jest przetrzymywany w pamięci. Jeżeli zmienną user ustawimy na null to połączenie znika. Żadna zmienna nie ma referencji do obiektu user więc Obiekt jest usowany z pamięci.
 
 ### Explain hoisting hoisting.
-- Zadeklarowana zmienna w skrypcie zostanie przeniesiona na samą górę kodu, ale bez przypisanej wartości. Dzięki temu możemy użyć zmiennej przed jej zadeklarowaniem.
-- Let i const nie sa hoistowane.
-- "use strict" blokuje hoisting.
+- Hoisting is where variable declarations are “hoisted” or lifted to the top of their scope.
+- variable inside a function, is lifted to the top of the local/functional scope.
+- The variable declaration is hoisted , but not its value given. 
+- `let` and `const` are not hoisted
+- `use strict` blocks hoisting.
 
 ### Var, let, const
 - `var` jest hoistowany jeżeli jest deklarowany poza funkcja to jest dostepny globalnie, jeżeli jest deklarowany w funkcji to nie wychodzi poza nia. Do `var` i `let` można nadpisywać. `var` może być ponownie deklarowany. Nie preferowany w uzyciu.
@@ -157,8 +158,8 @@ Obiekt user jest przetrzymywany w pamięci. Jeżeli zmienną user ustawimy na nu
 ```
 const promisedPresent = getPresent();
   promisedPresent
-    .then(present => console.log('Super prezent!', present))
-    .catch(error => console.log('Nie ma prezentu :(', error));
+	.then(present => console.log('Super prezent!', present))
+	.catch(error => console.log('Nie ma prezentu :(', error));
 ```
 - `then` will be executed when the promise is fullfilled, `catch` if not.
 
@@ -175,10 +176,10 @@ A Promise is in one of these states:
 ```
 async function doSomething() {
   try {
-    const data = await asyncAction();
-    console.log(`message = ${data}`);
+	const data = await asyncAction();
+	console.log(`message = ${data}`);
   } catch(error) {
-    console.log(`message = ${error}`);
+	console.log(`message = ${error}`);
   }
 }
 ```
@@ -187,13 +188,13 @@ async function doSomething() {
 - The first parameter in `call()` method sets the "this" value, which is the object, on which the function is invoked upon. In this case, it's the "obj" object above.
 - The rest of the parameters are the arguments to the actual function.
 ```javascript
-    const obj = {name:"Niladri"};
-    
-    const greeting = function(a,b,c){
-        return "welcome "+this.name+" to "+a+" "+b+" in "+c;
-    };
-    
-    console.log(greeting.call(obj,"Newtown","KOLKATA","WB"));
+	const obj = {name:"Niladri"};
+	
+	const greeting = function(a,b,c){
+		return "welcome "+this.name+" to "+a+" "+b+" in "+c;
+	};
+	
+	console.log(greeting.call(obj,"Newtown","KOLKATA","WB"));
 ```
 
 ### apply()
@@ -201,16 +202,16 @@ async function doSomething() {
 - The only difference of `apply()` with the `call()` method is that the second parameter of the `apply()` method accepts the arguments to the actual function as an array.
 - Use `.call()` or `.apply()` when you want to invoke the function immediately, and modify the context.
 ```javascript
-    const obj = {name:"Niladri"};
-    
-    const greeting = function(a,b,c){
-        return "welcome "+this.name+" to "+a+" "+b+" in "+c;
-    };
-    
-    // array of arguments to the actual function
-    const args = ["Newtown","KOLKATA","WB"];  
-    console.log("Output using .apply() below ")
-    console.log(greeting.apply(obj,args));
+	const obj = {name:"Niladri"};
+	
+	const greeting = function(a,b,c){
+		return "welcome "+this.name+" to "+a+" "+b+" in "+c;
+	};
+	
+	// array of arguments to the actual function
+	const args = ["Newtown","KOLKATA","WB"];  
+	console.log("Output using .apply() below ")
+	console.log(greeting.apply(obj,args));
 ```
 
 ### bind()
@@ -220,17 +221,17 @@ async function doSomething() {
 - `call()`/`apply()` call the function immediately, whereas `bind()` returns a function that, when later executed, will have the correct context set for calling the original function.
 
 ```javascript
-    const obj = {name:"Niladri"};
-    
-    const greeting = function(a,b,c){
-        return "welcome "+this.name+" to "+a+" "+b+" in "+c;
-    };
-    
-    //creates a bound function that has same body and parameters 
-    const bound = greeting.bind(obj); 
-    
-    console.log("Output using .bind() below ");
-    console.log(bound("Newtown","KOLKATA","WB")); //call the bound function
+  const obj = {name:"Niladri"};
+
+  const greeting = function(a,b,c){
+    return "welcome "+this.name+" to "+a+" "+b+" in "+c;
+  };
+
+//creates a bound function that has same body and parameters 
+  const bound = greeting.bind(obj); 
+  
+  console.log("Output using .bind() below ");
+  console.log(bound("Newtown","KOLKATA","WB")); //call the bound function
 ```
 
 ### What is the difference between call, bind and apply?
@@ -238,21 +239,21 @@ async function doSomething() {
 - You can use `call()`/`apply()` to invoke the function immediately.
 - `bind()` returns a bound function that, when executed later, will have the correct context ("this") for calling the original function.
 
-### Na co wskazuje this w JavaScript? Podaj przykłady.
-- Metoda - funkcja w klasie
-- Funkcja – po prostu funkcja
-- `this` w JS wskazuje na obiekt do którego należy. Globalny obiekt przegladarce to Window.
-- W metodzie this wskazuje na obiekt do którego należy.
-- W funkcji this wskazuje na obiekt globalny.
-- W funkcji w strict mode this to undefined
-- W evencie this wskazuje na obiekt który otrzymal event
+### What `this`points at in JavaScript?
+The JavaScript `this` keyword refers to the object it belongs to. That object which is executing the current bit of javascript code.
 
+- In a method, `this` refers to the owner object.
+- **Alone**, `this` refers to the global object.
+- In a **function**, `this` refers to the global object.
+- In a **function in strict mode**, `this` is undefined.
+- In an **event**, `this` refers to the element that received the event.
+- Methods like `call()`, and `apply()` can refer this to any object
 
-### Jaka jest różnica pomiędzy function expression a function declaration?
+### Function expression vs function declaration?
 - The function `statement`/`declaration` declares a function. A declared function is “saved for later use”, and will be executed later, when it is invoked (called).
 ```javascript
   function bar() {
-  return 3;
+	return 3;
   }
 ```
 - A JavaScript function can also be defined using an expression and be stored in a variable. After a function expression has been stored in a variable, the variable can be used as a function.
@@ -268,12 +269,32 @@ async function doSomething() {
 - `setInterval` wywoluje funkcje cyklicznie. Cykl definiujemy w milisekundach.
 - Aby anulowac te funkcje musimy przypisac do zmiennej setTimeout/setInterval, a nastepnie wywolac na zmiennej `.clearTimeout()`/`.clearInterval()`.
 
-### Inheritance
-- In the classical inheritance, methods from base class get copied into derived class.
-- In JavaScript, inheritance is supported by using prototype object.
-- 
+### What is prototype in JavaScript?
 
-### Czym jest prototype?
+
+### Inheritance
+[Source](https://dev.to/bcaruthers/interview-questions-for-the-javascript-developer-hoisting-prototypal-inheritance-and-attribute-vs-property-4d2b)
+- In JavaScript functions, arrays, objects, and wrappers for strings, numbers, and booleans are all objects.
+- Inheritance is simply when one object gains access to the properties and methods of another object.
+- JavaScript uses constructors or prototypes (other programming languages call these classes) as a sort of blueprint to create other objects (instances).
+- By using the prototype property, the objects below `fido` and `fefe`, have access to the method `calculateAge`. 
+
+```javascript
+const Dog = function(name, yearOfBirth, breed) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.breed = breed;
+}
+
+Dog.prototype.calculateAge =
+function() {
+  console.log((2019 - this.yearOfBirth) * 7);
+}
+
+const fido = new Dog('Fido', 2008, 'Labrador Retriever');
+const fefe = new Dog('Fefe', 2014, 'Poodle');
+```
+
 
 ## JavaScript example questions
 ### Destrukturyzacja
@@ -527,37 +548,37 @@ Console output: 1
 const http$ = this.http.get<Course[]>('/api/courses');
 
 http$
-    .pipe(
-        catchError(err => of([]))
-    )
-    .subscribe(
-        res => console.log('HTTP response', res),
-        err => console.log('HTTP Error', err),
-        () => console.log('HTTP request completed.')
-    );
+	.pipe(
+		catchError(err => of([]))
+	)
+	.subscribe(
+		res => console.log('HTTP response', res),
+		err => console.log('HTTP Error', err),
+		() => console.log('HTTP request completed.')
+	);
 ```
 * `finalize` operator run code that we always want executed.
 ```
 http$
-    .pipe(
-        map(res => res['payload']),
-        catchError(err => throwError(err)),
-        finalize(() => console.log("first finalize() block executed")),
+	.pipe(
+		map(res => res['payload']),
+		catchError(err => throwError(err)),
+		finalize(() => console.log("first finalize() block executed")),
 ```
 * instead of rethrowing the error, we can also simply retry to subscribe to the errored out Observable.
 ```
 http$.pipe(
-        tap(() => console.log("HTTP request executed")),
-        map(res => Object.values(res["payload"]) ),
-        shareReplay(),
-        retryWhen(errors => {
-            return errors
-                .pipe(
-                    tap(() => console.log('retrying...'))
-                );
-        })
-    )
-    .subscribe()
+		tap(() => console.log("HTTP request executed")),
+		map(res => Object.values(res["payload"]) ),
+		shareReplay(),
+		retryWhen(errors => {
+			return errors
+				.pipe(
+					tap(() => console.log('retrying...'))
+				);
+		})
+	)
+	.subscribe()
 ```
 
 ### Flattening operators
@@ -586,14 +607,14 @@ First, we just need to execute a regular HTTP query (for ex. get) and pipe the s
 be more declarative about unsubscribing
 ```
  ngOnInit() {
-     this.todos = this.store.select('todos').takeUntil(this.componetDestroyed).subscribe(console.log); 
+	 this.todos = this.store.select('todos').takeUntil(this.componetDestroyed).subscribe(console.log); 
 
-     this.posts = this.store.select('posts').takeUntil(this.componetDestroyed).subscribe(console.log); 
+	 this.posts = this.store.select('posts').takeUntil(this.componetDestroyed).subscribe(console.log); 
   }
 
   ngOnDestroy() {
-    this.componetDestroyed.next();
-    this.componetDestroyed.unsubscribe();
+	this.componetDestroyed.next();
+	this.componetDestroyed.unsubscribe();
   }
 ```
 
