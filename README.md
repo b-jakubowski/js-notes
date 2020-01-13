@@ -249,12 +249,30 @@ async function doSomething() {
 
 
 ### Jaka jest różnica pomiędzy function expression a function declaration?
+- The function `statement`/`declaration` declares a function. A declared function is “saved for later use”, and will be executed later, when it is invoked (called).
+```javascript
+  function bar() {
+  return 3;
+  }
+```
+- A JavaScript function can also be defined using an expression and be stored in a variable. After a function expression has been stored in a variable, the variable can be used as a function.
+```javascript
+  const x = function (a, b) {return a * b};
+```
+- `Function declarations` load before any code is executed while `Function expressions` load only when the interpreter reaches that line of code.
+- `Function expressions` aren’t hoisted, which allows them to retain a copy of the local variables from the scope where they were defined.
+- There are several different ways that `function expressions` become more useful than `function declarations`. As `closures`, As arguments to other functions, As `Immediately Invoked Function Expressions` (IIFE)
+
 ### W jaki sposób obsługiwany jest setInterval i setTimeout? Kiedy zostaną obsłużone jeśli mamy nieskończenie wiele console.log'ów? (pytanie o Event Loop)
 - `setTimeout` wywoluje funkcje po uplywie okreslonego czasu w milisekundach.
 - `setInterval` wywoluje funkcje cyklicznie. Cykl definiujemy w milisekundach.
 - Aby anulowac te funkcje musimy przypisac do zmiennej setTimeout/setInterval, a nastepnie wywolac na zmiennej `.clearTimeout()`/`.clearInterval()`.
 
-### W jaki sposób realizowane jest dziedziczenie w JavaScript?
+### Inheritance
+- In the classical inheritance, methods from base class get copied into derived class.
+- In JavaScript, inheritance is supported by using prototype object.
+- 
+
 ### Czym jest prototype?
 
 ## JavaScript example questions
