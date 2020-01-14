@@ -295,6 +295,35 @@ const fido = new Dog('Fido', 2008, 'Labrador Retriever');
 const fefe = new Dog('Fefe', 2014, 'Poodle');
 ```
 
+[Questions](https://dev.to/fullstackcafe/top-26-javascript-interview-questions-i-wish-i-knew-26k1)
+### What is Coercion in JavaScript?
+- JavaScript conversion between different two build-in types called coercion. Coercion comes in two forms in JavaScript: explicit and implicit.
+- explicit coercion:
+```javascript
+  var a = "42";
+  var b = Number( a );
+  
+  a;              // "42"
+  b;              // 42 -- the number!
+```
+- implicit coercion:
+```javascript
+  var a = "42";
+  var b = a * 1;  // "42" implicitly coerced to 42 here
+  
+  a;              // "42"
+  b;              // 42 -- the number!
+```
+
+### What is Scope and Execution context in JavaScript?
+- `Scope` defines the access to variables of a function when the function is invoked.
+- `Context` is always the value of the reserved word `this` which is a reference to the object that owns the execution of the code.
+- In each call, a function appends its context to the execution context. So each function creates its own execution context (its own scope).
+
+
+### Explain what a callback function is and provide a simple example.
+### What does "use strict" do?
+
 
 ## JavaScript example questions
 ### Destrukturyzacja
