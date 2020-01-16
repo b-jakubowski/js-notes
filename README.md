@@ -109,6 +109,26 @@ Testing:
 
 
 ## JavaScript Theory
+[Questions](https://dev.to/fullstackcafe/top-26-javascript-interview-questions-i-wish-i-knew-26k1)
+### Explain what a callback function is and provide a simple example.
+### What does "use strict" do?
+###  Explain the Prototype Design Pattern in JavaScript
+### Explain the difference between "undefined" and "not defined" in JavaScript
+### Explain event bubbling and how one may prevent it
+### What is “closure” in javascript? Provide an example?
+### Write a function that would allow you to do this.
+```javascript
+var addSix = createBase(6);
+addSix(10); // returns 16
+addSix(21); // returns 27
+```
+### How would you add your own method to the Array object so the following code would work?
+```javascript
+var arr = [1, 2, 3, 4, 5];
+var avg = arr.average();
+console.log(avg);
+```
+
 ### localStorage-sessionStorage-cookies
 localStorage
 - Stores data with no expiration date, and gets cleared only through JavaScript, or clearing the Browser cache / Locally Stored Data
@@ -140,7 +160,7 @@ Cookie
 - Jeżeli zmienna user ma przypisany do siebie obiekt user to pomiedzy nimi jest połączenie.
 Obiekt user jest przetrzymywany w pamięci. Jeżeli zmienną user ustawimy na null to połączenie znika. Żadna zmienna nie ma referencji do obiektu user więc Obiekt jest usowany z pamięci.
 
-### Explain hoisting hoisting.
+### Explain hoisting.
 - Hoisting is where variable declarations are “hoisted” or lifted to the top of their scope.
 - variable inside a function, is lifted to the top of the local/functional scope.
 - The variable declaration is hoisted , but not its value given. 
@@ -173,7 +193,7 @@ A Promise is in one of these states:
 - async / await solves the problem of threads being blocked (waiting idly) while waiting for its task to complete.
 - Specify the word `async` before a functions makes this function return a Promise.
 - `await` works only inside an Async function and it returns the Promise's result after it is solved. 
-```
+```javascript
 async function doSomething() {
   try {
 	const data = await asyncAction();
@@ -264,14 +284,6 @@ The JavaScript `this` keyword refers to the object it belongs to. That object wh
 - `Function expressions` aren’t hoisted, which allows them to retain a copy of the local variables from the scope where they were defined.
 - There are several different ways that `function expressions` become more useful than `function declarations`. As `closures`, As arguments to other functions, As `Immediately Invoked Function Expressions` (IIFE)
 
-### W jaki sposób obsługiwany jest setInterval i setTimeout? Kiedy zostaną obsłużone jeśli mamy nieskończenie wiele console.log'ów? (pytanie o Event Loop)
-- `setTimeout` wywoluje funkcje po uplywie okreslonego czasu w milisekundach.
-- `setInterval` wywoluje funkcje cyklicznie. Cykl definiujemy w milisekundach.
-- Aby anulowac te funkcje musimy przypisac do zmiennej setTimeout/setInterval, a nastepnie wywolac na zmiennej `.clearTimeout()`/`.clearInterval()`.
-
-### What is prototype in JavaScript?
-
-
 ### Inheritance
 [Source](https://dev.to/bcaruthers/interview-questions-for-the-javascript-developer-hoisting-prototypal-inheritance-and-attribute-vs-property-4d2b)
 - In JavaScript functions, arrays, objects, and wrappers for strings, numbers, and booleans are all objects.
@@ -295,7 +307,6 @@ const fido = new Dog('Fido', 2008, 'Labrador Retriever');
 const fefe = new Dog('Fefe', 2014, 'Poodle');
 ```
 
-[Questions](https://dev.to/fullstackcafe/top-26-javascript-interview-questions-i-wish-i-knew-26k1)
 ### What is Coercion in JavaScript?
 - JavaScript conversion between different two build-in types called coercion. Coercion comes in two forms in JavaScript: explicit and implicit.
 - explicit coercion:
@@ -319,10 +330,6 @@ const fefe = new Dog('Fefe', 2014, 'Poodle');
 - `Scope` defines the access to variables of a function when the function is invoked.
 - `Context` is always the value of the reserved word `this` which is a reference to the object that owns the execution of the code.
 - In each call, a function appends its context to the execution context. So each function creates its own execution context (its own scope).
-
-
-### Explain what a callback function is and provide a simple example.
-### What does "use strict" do?
 
 
 ## JavaScript example questions
